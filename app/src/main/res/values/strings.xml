@@ -3,6 +3,8 @@
     <string name="by_khalis">by Khalis</string>
     <string name="text_label_home">Home</string>
     <string name="text_label_collections">Collections</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="your_location">Your Location:</string>
+    <string name="your_recent_poem">Your Poem Here:</string>
+    <string name="add_poem">Add new poem in current location</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
