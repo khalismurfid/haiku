@@ -13,7 +13,6 @@ import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.databinding.ActivityMain
 const val NUM_PAGES = 5
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

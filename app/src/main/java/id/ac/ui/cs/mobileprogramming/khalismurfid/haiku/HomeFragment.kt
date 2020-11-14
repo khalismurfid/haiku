@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,9 @@ class HomeFragment : Fragment() {
                 it
             )
         }
+        binding.fabCreatePoem.setOnClickListener{
+            navigateToComposePoemPage()
+        }
         return binding.root
     }
 
@@ -41,6 +45,12 @@ class HomeFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    private fun navigateToComposePoemPage(){
+        val intent = Intent(activity, ComposePoemActivity::class.java)
+        startActivity(intent)
+        activity?.overridePendingTransition(com.google.android.material.R.anim.abc_slide_in_bottom, com.google.android.material.R.anim.abc_slide_out_bottom);
     }
 
     private inner class HomeFragmentAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
