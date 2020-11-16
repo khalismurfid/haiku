@@ -2,11 +2,9 @@ package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku
 
 import android.Manifest
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -30,6 +28,11 @@ class ComposePoemActivity : AppCompatActivity() {
         }
         setSupportActionBar(toolbar)
         supportActionBar?.title = Html.fromHtml("<font color='#ffffff'>Compose Poem</font>")
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(com.google.android.material.R.anim.abc_slide_in_bottom, com.google.android.material.R.anim.abc_slide_out_bottom);
     }
 
     private fun pickImage() {
@@ -60,8 +63,8 @@ class ComposePoemActivity : AppCompatActivity() {
             if (resultCode != Activity.RESULT_OK) {
                 return
             }
-            val uri = data?.data
-            image_view.setImageURI(uri)
+            val selectedImage: Uri? = data?.data
+            image_view.setImageURI(selectedImage)
             image_view.visibility = View.VISIBLE
         }
     }

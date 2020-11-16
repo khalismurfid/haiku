@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,16 +19,16 @@
 
            <TextView
                android:layout_width="wrap_content"
-               android:layout_marginTop="100dp"
+               android:layout_marginTop="50dp"
                android:layout_height="wrap_content"
-               android:textSize="16sp"
+               android:textSize="20sp"
                android:text="@string/your_location"
                />
 
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textSize="16sp"
+               android:textSize="20sp"
                android:text="Depok"
                />
 
@@ -41,9 +42,8 @@
 
            <androidx.viewpager.widget.ViewPager
                android:id="@+id/pager_poem"
-               android:layout_marginTop="5dp"
                android:layout_width="wrap_content"
-               android:layout_height="300dp" />
+               android:layout_height="350dp" />
 
            <com.google.android.material.floatingactionbutton.FloatingActionButton
                android:id="@+id/fab_create_poem"
