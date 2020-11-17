@@ -4,23 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CollectionsFragment">
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_album"
-            android:layout_width="match_parent"
-            android:scrollbars="none"
-            android:layout_height="200dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_location"
-            android:layout_width="match_parent"
-            android:scrollbars="none"
-            android:layout_height="200dp"/>
+        android:layout_height="wrap_content">
 
-
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/text_album"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:text="My Albums"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_album"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:layout_height="200dp"/>
+            <TextView
+                android:id="@+id/text_location"
+                android:textSize="20sp"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:text="Places"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_location"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:layout_height="200dp"/>
+            <TextView
+                android:id="@+id/text_time"
+                android:textSize="20sp"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:text="Time"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_time"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:layout_height="200dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

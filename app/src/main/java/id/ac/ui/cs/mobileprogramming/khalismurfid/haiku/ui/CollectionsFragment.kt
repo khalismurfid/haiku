@@ -33,6 +33,11 @@ class CollectionsFragment : Fragment() {
             LinearLayoutManager.HORIZONTAL,
             false);
         rootView.recyclerview_location.adapter = PoemAdapter(arrayListOf("test", "test", "test"))
+        rootView.recyclerview_time.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false);
+        rootView.recyclerview_time.adapter = PoemAdapter(arrayListOf("waktu", "hapus", "aku"))
         return rootView
     }
 
