@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku
+package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,7 +27,8 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_home, container, false)
         binding.pagerPoem.adapter = activity?.supportFragmentManager?.let {
             HomeFragmentAdapter(
                 it
@@ -39,7 +41,7 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): HomeFragment{
+        fun newInstance(): HomeFragment {
             val fragment = HomeFragment()
             val args = Bundle()
             fragment.arguments = args

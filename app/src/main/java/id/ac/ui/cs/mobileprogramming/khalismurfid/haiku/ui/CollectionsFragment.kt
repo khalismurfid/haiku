@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku
+package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.adapter.PoemAdapter
 import kotlinx.android.synthetic.main.fragment_collections.view.*
 
@@ -42,7 +43,7 @@ class CollectionsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): CollectionsFragment{
+        fun newInstance(): CollectionsFragment {
             val fragment = CollectionsFragment()
             val args = Bundle()
             fragment.arguments = args

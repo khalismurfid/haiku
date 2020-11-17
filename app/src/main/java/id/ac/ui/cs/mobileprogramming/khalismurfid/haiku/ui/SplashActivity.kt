@@ -1,9 +1,10 @@
-package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku
+package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var handler: Handler

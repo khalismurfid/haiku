@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku
+package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
 import android.Manifest
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
@@ -6,7 +6,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,6 +13,7 @@ import android.text.Html
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
 import kotlinx.android.synthetic.main.activity_compose_poem.*
 import java.io.File
 
