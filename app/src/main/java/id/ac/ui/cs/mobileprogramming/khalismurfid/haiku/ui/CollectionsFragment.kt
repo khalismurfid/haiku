@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.adapter.PoemAdapter
+import kotlinx.android.synthetic.main.fragment_collections.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,8 +22,18 @@ private const val ARG_PARAM2 = "param2"
 class CollectionsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_collections, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_collections, container, false)
+        rootView.recyclerview_album.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false);
+        rootView.recyclerview_album.adapter = PoemAdapter(arrayListOf("green", "red", "blue"))
+        rootView.recyclerview_location.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false);
+        rootView.recyclerview_location.adapter = PoemAdapter(arrayListOf("test", "test", "test"))
+        return rootView
     }
 
     companion object {
