@@ -42,6 +42,7 @@ class HomeFragment : Fragment() {
         binding.fabCreatePoem.setOnClickListener{
             navigateToComposePoemPage()
         }
+        binding.locationText.text = activity.location
         return binding.root
     }
 

@@ -16,10 +16,16 @@ class MainActivity : AppCompatActivity() {
     val poemViewModel: PoemViewModel by viewModels {
         PoemViewModelFactory((application as PoemApplication).repository)
     }
-
+    var location: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val extras = intent.extras
+        if (extras != null) {
+            location = extras.getString("location")
+            location?.let { poemViewModel.getOrCreateLocation(it) }
+            //The key argument here must match that used in the other activity
+        }
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
             R.layout.activity_main
         )

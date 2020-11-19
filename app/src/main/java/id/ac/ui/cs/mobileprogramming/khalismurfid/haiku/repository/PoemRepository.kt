@@ -28,6 +28,12 @@ class PoemRepository(private val poemDao: PoemDao, private val locationDao: Loca
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
+    suspend fun getLocationByName(name: String) : Location?{
+        return locationDao.getLocation(name)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun insertTag(tag: Tag) {
         tagDao.insertTags(tag)
     }

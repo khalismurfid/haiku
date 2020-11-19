@@ -1,9 +1,11 @@
 package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Location
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.repository.PoemRepository
@@ -21,8 +23,12 @@ class PoemViewModel(private val repository: PoemRepository) : ViewModel() {
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(poem: Poem) = viewModelScope.launch {
+    fun insertPoem(poem: Poem) = viewModelScope.launch {
         repository.insertPoem(poem)
+    }
+    fun getOrCreateLocation(location: String) = viewModelScope.launch {
+        val location: Location? = repository.getLocationByName(location)
+//        Log.e("location",location.name)
     }
 }
 

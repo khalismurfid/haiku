@@ -19,6 +19,9 @@ interface LocationDao{
     @Query("SELECT * FROM LOCATION")
     fun loadAllLocations(): LiveData<Array<Location>>
 
+    @Query("SELECT * FROM LOCATION WHERE name = :location")
+    suspend fun getLocation(location: String): Location?
+
     @Transaction
     @Query("SELECT * FROM LOCATION")
     fun getLocationsWithPoems(): LiveData<List<LocationWithPoems>>
