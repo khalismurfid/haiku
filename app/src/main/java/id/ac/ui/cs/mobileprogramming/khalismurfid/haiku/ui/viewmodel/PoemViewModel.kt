@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.repository.PoemRepository
 import kotlinx.coroutines.launch
 
@@ -15,6 +16,7 @@ class PoemViewModel(private val repository: PoemRepository) : ViewModel() {
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
     val allPoems: LiveData<Array<Poem>> = repository.allPoems
+    val allTags: LiveData<Array<Tag>> = repository.allTags
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way

@@ -11,6 +11,7 @@ import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
 import kotlinx.coroutines.*
 
 class PoemRepository(private val poemDao: PoemDao, private val locationDao: LocationDao, private val tagDao: TagDao) {
+    val allTags: LiveData<Array<Tag>> = tagDao.loadAllTags()
     val allPoems: LiveData<Array<Poem>> = poemDao.loadAllPoems()
 
     @Suppress("RedundantSuspendModifier")

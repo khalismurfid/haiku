@@ -10,15 +10,31 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Html
+import android.view.LayoutInflater
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isNotEmpty
+import androidx.lifecycle.Observer
+import com.google.android.material.chip.Chip
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.application.PoemApplication
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel.PoemViewModel
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel.PoemViewModelFactory
 import kotlinx.android.synthetic.main.activity_compose_poem.*
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ComposePoemActivity : AppCompatActivity() {
+    private val poemViewModel: PoemViewModel by viewModels {
+        PoemViewModelFactory((application as PoemApplication).repository)
+    }
+    private var poemPhoto: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +44,17 @@ class ComposePoemActivity : AppCompatActivity() {
         }
         setSupportActionBar(toolbar)
         supportActionBar?.title = Html.fromHtml("<font color='#ffffff'>Compose Poem</font>")
+        poemViewModel.allTags.observe(this, Observer { tags ->
+            // Update the cached copy of the words in the adapter.
+            tags?.let {
+               for (tag: Tag in tags){
+                   val chip = LayoutInflater.from(this).inflate(R.layout.chip,null) as Chip
+                   chip.text = tag.name
+                   chip.id = tag.id
+                   chip_group.addView(chip)
+               }
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -64,10 +91,20 @@ class ComposePoemActivity : AppCompatActivity() {
                 return
             }
             val selectedImage: Uri? = data?.data
+            poemPhoto = selectedImage.toString()
             image_view.setImageURI(selectedImage)
             image_view.visibility = View.VISIBLE
         }
     }
+
+//    fun insertPoem(){
+//            if(title_input.text !=null && content_input.text !=null && poemPhoto != ""){
+//                val simpleDateFormat = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss")
+//                val dateString: String = simpleDateFormat.format(Date())
+//                val poem : Poem = Poem(title_input.text.toString(), content_input.text.toString(), dateString, poemPhoto, )
+//                poemViewModel.insert(poem)
+//            }
+//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
