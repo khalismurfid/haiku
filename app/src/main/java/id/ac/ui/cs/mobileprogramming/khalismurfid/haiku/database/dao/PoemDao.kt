@@ -7,13 +7,13 @@ import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 @Dao
 interface PoemDao{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPoems(vararg poems: Poem) : Long
+    suspend fun insertPoems(poems: Poem) : Long
 
     @Update
-    suspend fun updatePoems(vararg poems: Poem) : Long
+    suspend fun updatePoems(poems: Poem) : Int
 
     @Delete
-    suspend fun deletePoems(vararg poems: Poem) : Long
+    suspend fun deletePoems(poems: Poem) : Int
 
     @Query("SELECT * FROM POEM")
     fun loadAllPoems(): LiveData<Array<Poem>>

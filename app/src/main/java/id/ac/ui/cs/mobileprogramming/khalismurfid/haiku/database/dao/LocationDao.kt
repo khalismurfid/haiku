@@ -8,13 +8,13 @@ import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Location
 @Dao
 interface LocationDao{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertLocations(vararg locations: Location) : Long
+    suspend fun insertLocations(locations: Location) : Long
 
     @Update
-    suspend fun updateLocations(vararg locations: Location) : Long
+    suspend fun updateLocations(locations: Location) : Int
 
     @Delete
-    suspend fun deleteUsers(vararg locations: Location) : Long
+    suspend fun deleteUsers(locations: Location) : Int
 
     @Query("SELECT * FROM LOCATION")
     fun loadAllLocations(): LiveData<Array<Location>>

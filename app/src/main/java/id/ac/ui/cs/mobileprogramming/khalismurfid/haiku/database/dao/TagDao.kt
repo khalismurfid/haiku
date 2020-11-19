@@ -8,13 +8,13 @@ import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.TagWithP
 @Dao
 interface TagDao{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertTags(vararg tags: Tag) : Long
+    suspend fun insertTags(tags: Tag) : Long
 
     @Update
-    suspend fun updateTags(vararg tags: Tag) : Long
+    suspend fun updateTags(tags: Tag) : Int
 
     @Delete
-    suspend fun deleteTags(vararg tags: Tag) : Long
+    suspend fun deleteTags(tags: Tag) : Int
 
     @Query("SELECT * FROM TAG")
     fun loadAllTags(): LiveData<Array<Tag>>

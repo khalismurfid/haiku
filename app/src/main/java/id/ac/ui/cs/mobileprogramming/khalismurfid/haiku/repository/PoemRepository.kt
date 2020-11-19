@@ -10,8 +10,8 @@ import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
 import kotlinx.coroutines.*
 
-class PoemRepository private constructor(private val poemDao: PoemDao, private val locationDao: LocationDao, private val tagDao: TagDao) {
-    private val allPoems: LiveData<Array<Poem>> = poemDao.loadAllPoems()
+class PoemRepository(private val poemDao: PoemDao, private val locationDao: LocationDao, private val tagDao: TagDao) {
+    val allPoems: LiveData<Array<Poem>> = poemDao.loadAllPoems()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

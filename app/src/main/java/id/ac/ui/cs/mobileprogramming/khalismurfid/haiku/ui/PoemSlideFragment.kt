@@ -1,11 +1,14 @@
 package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
+import kotlinx.android.synthetic.main.fragment_poem_slide.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PoemSlideFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PoemSlideFragment : Fragment() {
+class PoemSlideFragment(val poem: Poem) : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,27 +37,10 @@ class PoemSlideFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_poem_slide, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PoemSlideFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PoemSlideFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val rootView = inflater.inflate(R.layout.fragment_poem_slide, container, false)
+        rootView.image.setImageURI(Uri.parse(poem.image))
+        rootView.poem_title.text = poem.title
+        rootView.poem_date.text = poem.date
+        return rootView
     }
 }

@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Observer
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,11 +31,14 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_home, container, false)
-        binding.pagerPoem.adapter = activity?.supportFragmentManager?.let {
-            HomeFragmentAdapter(
-                it
+        val activity = activity as MainActivity
+        activity.poemViewModel.allPoems.observe(activity, Observer { poems ->
+            // Update the cached copy of the words in the adapter.
+            poems?.let { binding.pagerPoem.adapter = HomeFragmentAdapter(
+                activity.supportFragmentManager, poems
             )
-        }
+            }
+        })
         binding.fabCreatePoem.setOnClickListener{
             navigateToComposePoemPage()
         }
@@ -55,8 +60,12 @@ class HomeFragment : Fragment() {
         activity?.overridePendingTransition(com.google.android.material.R.anim.abc_slide_in_bottom, com.google.android.material.R.anim.abc_slide_out_bottom);
     }
 
-    private inner class HomeFragmentAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        override fun getCount(): Int = NUM_PAGES
-        override fun getItem(position: Int): Fragment = PoemSlideFragment()
+    private inner class HomeFragmentAdapter(fm: FragmentManager, private val poems: Array<Poem>) : FragmentStatePagerAdapter(fm) {
+        override fun getCount(): Int {
+            return poems.size
+        }
+        override fun getItem(position: Int): Fragment {
+            return PoemSlideFragment(poems[position])
+        }
     }
 }
