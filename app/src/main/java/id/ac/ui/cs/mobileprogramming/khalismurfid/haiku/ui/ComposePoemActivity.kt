@@ -15,12 +15,10 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.view.isNotEmpty
 import androidx.lifecycle.Observer
 import com.google.android.material.chip.Chip
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.application.PoemApplication
-import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel.PoemViewModel
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel.PoemViewModelFactory
@@ -35,12 +33,21 @@ class ComposePoemActivity : AppCompatActivity() {
         PoemViewModelFactory((application as PoemApplication).repository)
     }
     private var poemPhoto: String = ""
+    private lateinit var location: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compose_poem)
+        val extras = intent.extras
+        if (extras != null) {
+            location = extras.getString("location").toString()
+            //The key argument here must match that used in the other activity
+        }
         button_choose_photo.setOnClickListener {
             pickImage()
+        }
+        send_button.setOnClickListener {
+            insertPoem()
         }
         setSupportActionBar(toolbar)
         supportActionBar?.title = Html.fromHtml("<font color='#ffffff'>Compose Poem</font>")
@@ -55,6 +62,7 @@ class ComposePoemActivity : AppCompatActivity() {
                }
             }
         })
+
     }
 
     override fun onBackPressed() {
@@ -65,7 +73,7 @@ class ComposePoemActivity : AppCompatActivity() {
     private fun pickImage() {
         if (ActivityCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) ==  PackageManager.PERMISSION_GRANTED) {
             val intent = Intent(
-                Intent.ACTION_PICK,
+                Intent.ACTION_OPEN_DOCUMENT,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI
             )
             intent.type = "image/*"
@@ -97,14 +105,15 @@ class ComposePoemActivity : AppCompatActivity() {
         }
     }
 
-//    fun insertPoem(){
-//            if(title_input.text !=null && content_input.text !=null && poemPhoto != ""){
-//                val simpleDateFormat = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss")
-//                val dateString: String = simpleDateFormat.format(Date())
-//                val poem : Poem = Poem(title_input.text.toString(), content_input.text.toString(), dateString, poemPhoto, )
-//                poemViewModel.insert(poem)
-//            }
-//    }
+    private fun insertPoem(){
+            if(title_input.text !=null && content_input.text !=null && poemPhoto != "" && chip_group.checkedChipIds.size != 0){
+                val simpleDateFormat = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss")
+                val dateString: String = simpleDateFormat.format(Date())
+                val ids: List<Int> = chip_group.checkedChipIds
+                poemViewModel.createPoemWLocationAndTag(title_input.text.toString(), content_input.text.toString(), dateString, poemPhoto, location, ids[0])
+                this.finish()
+            }
+    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -117,6 +126,7 @@ class ComposePoemActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun uriToImageFile(uri: Uri): File? {
         val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
         val cursor = contentResolver.query(uri, filePathColumn, null, null, null)

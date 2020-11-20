@@ -22,8 +22,8 @@ class PoemRepository(private val poemDao: PoemDao, private val locationDao: Loca
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertLocation(location: Location) {
-        locationDao.insertLocations(location)
+    suspend fun insertLocation(location: Location): Long {
+        return locationDao.insertLocations(location)
     }
 
     @Suppress("RedundantSuspendModifier")

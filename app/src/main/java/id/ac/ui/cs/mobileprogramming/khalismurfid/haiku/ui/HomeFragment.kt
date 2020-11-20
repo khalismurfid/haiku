@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
 
     private fun navigateToComposePoemPage(){
         val intent = Intent(activity, ComposePoemActivity::class.java)
+        intent.putExtra("location", (activity as MainActivity).location)
         startActivity(intent)
         activity?.overridePendingTransition(com.google.android.material.R.anim.abc_slide_in_bottom, com.google.android.material.R.anim.abc_slide_out_bottom);
     }

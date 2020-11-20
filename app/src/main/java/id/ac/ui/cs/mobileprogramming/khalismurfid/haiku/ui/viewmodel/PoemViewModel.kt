@@ -19,6 +19,7 @@ class PoemViewModel(private val repository: PoemRepository) : ViewModel() {
     // - Repository is completely separated from the UI through the ViewModel.
     val allPoems: LiveData<Array<Poem>> = repository.allPoems
     val allTags: LiveData<Array<Tag>> = repository.allTags
+    var currentLocationId: Long? = null
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
@@ -26,9 +27,15 @@ class PoemViewModel(private val repository: PoemRepository) : ViewModel() {
     fun insertPoem(poem: Poem) = viewModelScope.launch {
         repository.insertPoem(poem)
     }
-    fun getOrCreateLocation(location: String) = viewModelScope.launch {
-        val location: Location? = repository.getLocationByName(location)
-//        Log.e("location",location.name)
+    fun createPoemWLocationAndTag(title:String, content: String, date: String, photo:String , location: String, tagId: Int) = viewModelScope.launch {
+        var locationObject: Location? = repository.getLocationByName(location)
+        if (locationObject != null){
+            currentLocationId = locationObject.id.toLong()
+        } else{
+            locationObject = Location(location)
+            currentLocationId = repository.insertLocation(locationObject)
+        }
+        repository.insertPoem(Poem(title, content, date, photo, currentLocationId!!, tagId.toLong()))
     }
 }
 

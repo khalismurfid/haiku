@@ -25,6 +25,7 @@ class LocationService : Service() {
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 0
         locationRequest.fastestInterval = 0
+        locationRequest.numUpdates = 1;
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
