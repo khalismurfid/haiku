@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -41,6 +42,16 @@ class PoemSlideFragment(val poem: Poem) : Fragment() {
         rootView.image.setImageURI(Uri.parse(poem.image))
         rootView.poem_title.text = poem.title
         rootView.poem_date.text = poem.date
+        rootView.card_view.setOnClickListener{
+            val intent = Intent(activity, PoemDetailActivity::class.java)
+            intent.putExtra("title", poem.title)
+            intent.putExtra("content", poem.content)
+            intent.putExtra("date", poem.date)
+            intent.putExtra("imageUri", poem.image)
+            intent.putExtra("locationId", poem.locationId.toInt())
+            intent.putExtra("tagId", poem.tagId.toInt())
+            startActivity(intent)
+        }
         return rootView
     }
 }

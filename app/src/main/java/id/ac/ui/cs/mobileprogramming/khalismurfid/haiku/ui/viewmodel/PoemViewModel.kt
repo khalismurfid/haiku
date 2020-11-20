@@ -1,10 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Location
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
@@ -19,6 +16,7 @@ class PoemViewModel(private val repository: PoemRepository) : ViewModel() {
     // - Repository is completely separated from the UI through the ViewModel.
     val allPoems: LiveData<Array<Poem>> = repository.allPoems
     val allTags: LiveData<Array<Tag>> = repository.allTags
+    val allLocations: LiveData<Array<Location>> = repository.allLocations
     var currentLocationId: Long? = null
 
     /**
@@ -27,6 +25,44 @@ class PoemViewModel(private val repository: PoemRepository) : ViewModel() {
     fun insertPoem(poem: Poem) = viewModelScope.launch {
         repository.insertPoem(poem)
     }
+
+    fun getAllPoemWithTagId(tagId: Int): LiveData<Array<Poem>>{
+        val result = MutableLiveData<Array<Poem>>()
+        viewModelScope.launch {
+            val poemsWithTags = repository.loadAllPoemWithTagId(tagId)
+            result.postValue(poemsWithTags)
+        }
+        return result
+    }
+
+    fun getAllPoemWithLocationId(locationId: Int): LiveData<Array<Poem>>{
+        val result = MutableLiveData<Array<Poem>>()
+        viewModelScope.launch {
+            val poemsWithLocations = repository.loadAllPoemWithLocationId(locationId)
+            result.postValue(poemsWithLocations)
+        }
+        return result
+    }
+
+    fun getLocation(locationId: Int): LiveData<Location>{
+        val result = MutableLiveData<Location>()
+        viewModelScope.launch {
+            val location = repository.loadLocationById(locationId)
+            result.postValue(location)
+        }
+        return result
+    }
+
+    fun getTag(tagId: Int): LiveData<Tag>{
+        val result = MutableLiveData<Tag>()
+        viewModelScope.launch {
+            val tag = repository.loadTagById(tagId)
+            result.postValue(tag)
+        }
+        return result
+    }
+
+
     fun createPoemWLocationAndTag(title:String, content: String, date: String, photo:String , location: String, tagId: Int) = viewModelScope.launch {
         var locationObject: Location? = repository.getLocationByName(location)
         if (locationObject != null){

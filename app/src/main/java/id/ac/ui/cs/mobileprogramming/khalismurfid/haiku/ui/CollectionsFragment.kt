@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.common.Common.*
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Location
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Tag
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.adapter.PoemAdapter
 import kotlinx.android.synthetic.main.fragment_collections.view.*
 
@@ -28,17 +32,47 @@ class CollectionsFragment : Fragment() {
             context,
             LinearLayoutManager.HORIZONTAL,
             false);
-        rootView.recyclerview_album.adapter = PoemAdapter(arrayListOf("green", "red", "blue"))
+        val activity = activity as MainActivity
+        activity.poemViewModel.allTags.observe(activity, Observer { tags ->
+            // Update the cached copy of the words in the adapter.
+            tags?.let {
+                val listAlbum = ArrayList<AlbumCollection>()
+                for (tag: Tag in tags){
+                    activity.poemViewModel.getAllPoemWithTagId(tag.id).observe(activity, Observer { poems ->
+                        if(poems.isNotEmpty()){
+                            val album = AlbumCollection(poems, tag.name)
+                            listAlbum.add(album)
+                            rootView.recyclerview_album.adapter = PoemAdapter(listAlbum)
+                        }
+                    })
+                }
+            }
+        })
         rootView.recyclerview_location.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.HORIZONTAL,
             false);
-        rootView.recyclerview_location.adapter = PoemAdapter(arrayListOf("test", "test", "test"))
-        rootView.recyclerview_time.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.HORIZONTAL,
-            false);
-        rootView.recyclerview_time.adapter = PoemAdapter(arrayListOf("waktu", "hapus", "aku"))
+        activity.poemViewModel.allLocations.observe(activity, Observer { locations ->
+            // Update the cached copy of the words in the adapter.
+            locations?.let {
+                val listAlbum = ArrayList<AlbumCollection>()
+                for (location: Location in locations){
+                    activity.poemViewModel.getAllPoemWithLocationId(location.id).observe(activity, Observer { poems ->
+                        if(poems.isNotEmpty()){
+                            val album = AlbumCollection(poems, location.name)
+                            listAlbum.add(album)
+                            rootView.recyclerview_location.adapter = PoemAdapter(listAlbum)
+                        }
+                    })
+                }
+            }
+        })
+//        rootView.recyclerview_location.adapter = PoemAdapter(arrayListOf("test", "test", "test"))
+//        rootView.recyclerview_time.layoutManager = LinearLayoutManager(
+//            context,
+//            LinearLayoutManager.HORIZONTAL,
+//            false);
+//        rootView.recyclerview_time.adapter = PoemAdapter(arrayListOf("waktu", "hapus", "aku"))
         return rootView
     }
 

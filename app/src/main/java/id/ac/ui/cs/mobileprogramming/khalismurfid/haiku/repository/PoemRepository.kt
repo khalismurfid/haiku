@@ -13,6 +13,7 @@ import kotlinx.coroutines.*
 class PoemRepository(private val poemDao: PoemDao, private val locationDao: LocationDao, private val tagDao: TagDao) {
     val allTags: LiveData<Array<Tag>> = tagDao.loadAllTags()
     val allPoems: LiveData<Array<Poem>> = poemDao.loadAllPoems()
+    val allLocations: LiveData<Array<Location>> = locationDao.loadAllLocations()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
@@ -30,6 +31,31 @@ class PoemRepository(private val poemDao: PoemDao, private val locationDao: Loca
     @WorkerThread
     suspend fun getLocationByName(name: String) : Location?{
         return locationDao.getLocation(name)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun loadAllPoemWithTagId(tagId: Int) : Array<Poem>{
+        return poemDao.loadAllPoemWithTagId(tagId)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun loadAllPoemWithLocationId(locationId: Int) : Array<Poem>{
+        return poemDao.loadAllPoemWithLocationId(locationId)
+    }
+
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun loadLocationById(locationId: Int) : Location? {
+        return locationDao.getLocation(locationId)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun loadTagById(tagId: Int) : Tag? {
+        return tagDao.getTag(tagId)
     }
 
     @Suppress("RedundantSuspendModifier")

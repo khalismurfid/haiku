@@ -30,7 +30,7 @@
                     />
 
                 <ImageView
-                    android:id="@+id/image"
+                    android:id="@+id/image_poem"
                     android:src="@drawable/poem_1"
                     android:scaleType="centerCrop"
                     android:layout_width="125dp"

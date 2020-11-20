@@ -107,7 +107,7 @@ class ComposePoemActivity : AppCompatActivity() {
 
     private fun insertPoem(){
             if(title_input.text !=null && content_input.text !=null && poemPhoto != "" && chip_group.checkedChipIds.size != 0){
-                val simpleDateFormat = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss")
+                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
                 val dateString: String = simpleDateFormat.format(Date())
                 val ids: List<Int> = chip_group.checkedChipIds
                 poemViewModel.createPoemWLocationAndTag(title_input.text.toString(), content_input.text.toString(), dateString, poemPhoto, location, ids[0])
