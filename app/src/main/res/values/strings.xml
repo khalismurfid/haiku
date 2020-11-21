@@ -12,4 +12,10 @@
     <string name="tag_happy">Happy</string>
     <string name="tag_sad">Sad</string>
     <string name="tag_fear">Fear</string>
+    <string name="send">Send</string>
+    <string name="compose_poem">Compose Poem</string>
+    <string name="poem_photo">Poem Photo:</string>
+    <string name="choose_photo">CHOOSE PHOTO</string>
+    <string name="tags">Tags</string>
+    <string name="places">Places</string>
 </resources>

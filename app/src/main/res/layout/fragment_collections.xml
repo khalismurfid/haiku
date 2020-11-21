@@ -17,7 +17,7 @@
                 android:layout_margin="16dp"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
-                android:text="Tags"
+                android:text="@string/tags"
                 android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_album"
@@ -29,7 +29,7 @@
                 android:textSize="20sp"
                 android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:text="Places"
+                android:text="@string/places"
                 android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_location"

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Haiku</string>
+    <string name="by_khalis">oleh Khalis</string>
+    <string name="text_label_home">Beranda</string>
+    <string name="text_label_collections">Koleksi</string>
+    <string name="your_location">Lokasi Sekarang:</string>
+    <string name="your_recent_poem">Puisi di Lokasi Saat Ini:</string>
+    <string name="add_poem">Tambahkan puisi baru di lokasi ini</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="poem_title">Judul Puisi</string>
+    <string name="poem_content">Isi Puisi</string>
+    <string name="tag_happy">Senang</string>
+    <string name="tag_sad">Sedih</string>
+    <string name="tag_fear">Takut</string>
+    <string name="send">Kirim</string>
+    <string name="compose_poem">Buat Puisi</string>
+    <string name="poem_photo">Foto Puisi:</string>
+    <string name="choose_photo">PILIH FOTO</string>
+    <string name="tags">Tag</string>
+    <string name="places">Tempat</string>
+</resources>

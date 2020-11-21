@@ -28,12 +28,12 @@
                     android:textSize="22sp"
                     android:layout_weight="1"
                     android:textColor="@color/design_default_color_on_primary"
-                    android:text="Compose Poem"/>
+                    android:text="@string/compose_poem"/>
 
                 <Button
                     android:id="@+id/send_button"
                     android:layout_width="wrap_content"
-                    android:text="Send"
+                    android:text="@string/send"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -85,7 +85,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Poem Photo: "/>
+                    android:text="@string/poem_photo"/>
                 <ImageView
                     android:visibility="gone"
                     android:layout_margin="16dp"
@@ -103,7 +103,7 @@
                     android:id="@+id/button_choose_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CHOOSE PHOTO"
+                    android:text="@string/choose_photo"
                     />
 
             </LinearLayout>
