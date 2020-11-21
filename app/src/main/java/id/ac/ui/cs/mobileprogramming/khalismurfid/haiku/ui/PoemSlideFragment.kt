@@ -44,7 +44,7 @@ class PoemSlideFragment(val poem: Poem) : Fragment() {
         rootView.image.setImageURI(Uri.parse(poem.image))
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
         val date = formatter.parse(poem.date)
-        val date_format = SimpleDateFormat("dd MMMM yyyy").format(date) //08, Aug 2019
+        val date_format = SimpleDateFormat("dd MMMM yyyy").format(date!!) //08, Aug 2019
 
         rootView.poem_title.text = poem.title
         rootView.poem_date.text = date_format

@@ -33,6 +33,8 @@ class CollectionsFragment : Fragment() {
             LinearLayoutManager.HORIZONTAL,
             false);
         val activity = activity as MainActivity
+        rootView.recyclerview_album.adapter =
+            context?.let { PoemAdapter(ArrayList<AlbumCollection>(), it) }
         activity.poemViewModel.allTags.observe(activity, Observer { tags ->
             // Update the cached copy of the words in the adapter.
             tags?.let {
@@ -42,7 +44,8 @@ class CollectionsFragment : Fragment() {
                         if(poems.isNotEmpty()){
                             val album = AlbumCollection(poems, tag.name)
                             listAlbum.add(album)
-                            rootView.recyclerview_album.adapter = PoemAdapter(listAlbum)
+                            rootView.recyclerview_album.adapter =
+                                context?.let { it1 -> PoemAdapter(listAlbum, it1) }
                         }
                     })
                 }
@@ -52,6 +55,9 @@ class CollectionsFragment : Fragment() {
             context,
             LinearLayoutManager.HORIZONTAL,
             false);
+
+        rootView.recyclerview_location.adapter =
+            context?.let { PoemAdapter(ArrayList<AlbumCollection>(), it) }
         activity.poemViewModel.allLocations.observe(activity, Observer { locations ->
             // Update the cached copy of the words in the adapter.
             locations?.let {
@@ -61,7 +67,8 @@ class CollectionsFragment : Fragment() {
                         if(poems.isNotEmpty()){
                             val album = AlbumCollection(poems, location.name)
                             listAlbum.add(album)
-                            rootView.recyclerview_location.adapter = PoemAdapter(listAlbum)
+                            rootView.recyclerview_location.adapter =
+                                context?.let { it1 -> PoemAdapter(listAlbum, it1) }
                         }
                     })
                 }

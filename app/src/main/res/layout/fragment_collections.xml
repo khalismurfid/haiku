@@ -17,7 +17,7 @@
                 android:layout_margin="16dp"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
-                android:text="My Albums"
+                android:text="Tags"
                 android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_album"
@@ -36,18 +36,7 @@
                 android:layout_width="match_parent"
                 android:scrollbars="none"
                 android:layout_height="200dp"/>
-            <TextView
-                android:id="@+id/text_time"
-                android:textSize="20sp"
-                android:layout_margin="16dp"
-                android:layout_width="match_parent"
-                android:text="Time"
-                android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_time"
-                android:layout_width="match_parent"
-                android:scrollbars="none"
-                android:layout_height="200dp"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
