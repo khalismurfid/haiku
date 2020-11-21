@@ -62,6 +62,15 @@ class PoemViewModel(private val repository: PoemRepository) : ViewModel() {
         return result
     }
 
+    fun getPoem(poemId: Int): LiveData<Poem>{
+        val result = MutableLiveData<Poem>()
+        viewModelScope.launch {
+            val poem = repository.loadPoemById(poemId)
+            result.postValue(poem)
+        }
+        return result
+    }
+
 
     fun createPoemWLocationAndTag(title:String, content: String, date: String, photo:String , location: String, tagId: Int) = viewModelScope.launch {
         var locationObject: Location? = repository.getLocationByName(location)

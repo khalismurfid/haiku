@@ -67,7 +67,11 @@ class HomeFragment : Fragment() {
             return poems.size
         }
         override fun getItem(position: Int): Fragment {
-            return PoemSlideFragment(poems[position])
+            val fragment = PoemSlideFragment()
+            val bundle = Bundle()
+            bundle.putInt("poemId", poems[position].id)
+            fragment.arguments = bundle
+            return fragment
         }
     }
 }

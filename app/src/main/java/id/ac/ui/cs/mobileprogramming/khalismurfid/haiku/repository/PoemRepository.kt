@@ -60,6 +60,12 @@ class PoemRepository(private val poemDao: PoemDao, private val locationDao: Loca
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
+    suspend fun loadPoemById(poemId: Int) : Poem? {
+        return poemDao.getPoem(poemId)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun insertTag(tag: Tag) {
         tagDao.insertTags(tag)
     }

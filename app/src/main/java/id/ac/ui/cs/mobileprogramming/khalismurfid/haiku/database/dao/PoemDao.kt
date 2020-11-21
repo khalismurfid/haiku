@@ -2,6 +2,7 @@ package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Location
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 
 @Dao
@@ -23,4 +24,7 @@ interface PoemDao{
 
     @Query("SELECT * FROM POEM WHERE locationId = :locationId")
     suspend fun loadAllPoemWithLocationId(locationId: Int): Array<Poem>
+
+    @Query("SELECT * FROM POEM WHERE id = :poemId")
+    suspend fun getPoem(poemId: Int): Poem?
 }
