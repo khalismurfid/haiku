@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="32dp"
+    tools:context=".ui.PoemDetailActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <ImageView
+                android:id="@+id/poem_image"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/haiku"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/poem_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All about you"
+                    android:layout_marginVertical="32dp"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/poem_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:layout_marginHorizontal="32dp"
+                    android:text="All about you jasiud uaisdh uhdiu jdasj sjdio jdsaioj \nah uahsu ihasu idhui dshiu hadiuhu"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:id="@+id/poem_date_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Depok, 28 januari 2019"
+                    android:gravity="end"
+                    android:layout_marginVertical="32dp"
+                    android:layout_marginHorizontal="32dp"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:id="@+id/poem_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="#Happy"
+                    android:gravity="start"
+                    android:layout_marginVertical="24dp"
+                    android:layout_marginHorizontal="32dp"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
