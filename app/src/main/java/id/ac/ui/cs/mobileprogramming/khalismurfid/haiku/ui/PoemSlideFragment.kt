@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 import kotlinx.android.synthetic.main.fragment_poem_slide.view.*
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,13 +42,17 @@ class PoemSlideFragment(val poem: Poem) : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_poem_slide, container, false)
         rootView.image.setImageURI(Uri.parse(poem.image))
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val date = formatter.parse(poem.date)
+        val date_format = SimpleDateFormat("dd MMMM yyyy").format(date) //08, Aug 2019
+
         rootView.poem_title.text = poem.title
-        rootView.poem_date.text = poem.date
+        rootView.poem_date.text = date_format
         rootView.card_view.setOnClickListener{
             val intent = Intent(activity, PoemDetailActivity::class.java)
             intent.putExtra("title", poem.title)
             intent.putExtra("content", poem.content)
-            intent.putExtra("date", poem.date)
+            intent.putExtra("date", date_format)
             intent.putExtra("imageUri", poem.image)
             intent.putExtra("locationId", poem.locationId.toInt())
             intent.putExtra("tagId", poem.tagId.toInt())

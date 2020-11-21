@@ -48,7 +48,7 @@ class PoemDetailActivity : AppCompatActivity() {
         poemViewModel.getTag(tagId!!).observe(this, Observer { tag ->
             // Update the cached copy of the words in the adapter.
             if(tag!=null){
-                poem_tag.text = "#$tag.name"
+                poem_tag.text = "#${tag.name}"
             }
         })
 
