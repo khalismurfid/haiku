@@ -27,6 +27,15 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        // Used to load the 'native-lib' library on application startup.
+        init {
+            System.loadLibrary("native-lib")
+        }
+    }
+
+    external fun additionByOne(num: Int): Int
+
     val poemViewModel: PoemViewModel by viewModels {
         PoemViewModelFactory((application as PoemApplication).repository)
     }
@@ -60,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         mHandler = Handler(Looper.getMainLooper())
         mRunnable = Runnable {
-            Common.timePassed += 1
+            Common.timePassed = additionByOne(Common.timePassed)
             if(Common.timePassed % 60 == 0){
                 sendNotification()
             }
