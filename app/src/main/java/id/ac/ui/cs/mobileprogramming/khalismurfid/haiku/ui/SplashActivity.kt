@@ -4,12 +4,16 @@ import MyGLSurfaceView
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.DialogInterface
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.opengl.GLSurfaceView
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
+import android.net.NetworkInfo
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
 import androidx.core.app.ActivityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
@@ -30,22 +34,25 @@ class SplashActivity : AppCompatActivity() {
         setContentView(gLView)
 //        setContentView(R.layout.activity_splash)
 
-        checkForPermission()
+        if(isNetworkAvailable(this)){
+            checkForPermission()
 
-        locationReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                if (intent.action.toString() == Common.LOCATION_RECEIVER_KEY) {
-                    val location = intent.getStringExtra("location")
-                    stopLocationService()
-                    val intent_main = Intent(this@SplashActivity, MainActivity::class.java)
-                    intent_main.putExtra("location", location);
-                    navigateToMainActivity(intent_main)
+            locationReceiver = object : BroadcastReceiver() {
+                override fun onReceive(context: Context, intent: Intent) {
+                    if (intent.action.toString() == Common.LOCATION_RECEIVER_KEY) {
+                        val location = intent.getStringExtra("location")
+                        stopLocationService()
+                        val intent_main = Intent(this@SplashActivity, MainActivity::class.java)
+                        intent_main.putExtra("location", location);
+                        navigateToMainActivity(intent_main)
+                    }
                 }
             }
+            // Register broadcast
+            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver as BroadcastReceiver, IntentFilter(Common.LOCATION_RECEIVER_KEY))
+        } else {
+            showAlertMenu()
         }
-        // Register broadcast
-        LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver as BroadcastReceiver, IntentFilter(Common.LOCATION_RECEIVER_KEY))
-
     }
 
     override fun onStop() {
@@ -92,7 +99,31 @@ class SplashActivity : AppCompatActivity() {
             stopService(intent)
         }
     }
+    fun isNetworkAvailable(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        var activeNetworkInfo: NetworkInfo? = null
+        activeNetworkInfo = cm.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
+    }
+    private fun showAlertMenu() {
+        val builder =
+            AlertDialog.Builder(this)
 
+        builder.setMessage("Haiku Need Internet Connection for Better Location Tagging")
+        builder.setTitle("Warning!")
+        builder.setCancelable(false)
+
+        builder
+            .setPositiveButton(
+                "Back",
+                DialogInterface.OnClickListener { dialog, which ->
+                    // then app will close
+                    finish()
+                })
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
 
 
 }
