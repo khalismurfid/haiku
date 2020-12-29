@@ -1,5 +1,7 @@
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
+import android.opengl.Matrix
+import android.os.SystemClock
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -9,21 +11,32 @@ import javax.microedition.khronos.opengles.GL10
 
 class MyGLRenderer : GLSurfaceView.Renderer {
     private lateinit var triangle: Triangle
+    private val rotationMatrix = FloatArray(16)
+    var colorVal = 1.0
+    private val DURATION_OF_FLASH = 1000.0 //
 
     override fun onSurfaceCreated(unused: GL10, config: EGLConfig) {
         // Set the background frame color
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GLES20.glClearColor(colorVal.toFloat(), 0.0f, 0.0f, 1.0f)
         triangle = Triangle()
     }
 
     override fun onDrawFrame(unused: GL10) {
         // Redraw background color
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
-        triangle.draw()
+        colorVal =
+            Math.sin(System.currentTimeMillis() * 2 * Math.PI / DURATION_OF_FLASH) * 0.4 + 1.0
+        val color = floatArrayOf(colorVal.toFloat(), 0.96953125f, 0.92265625f, 1.0f)
+        val time = SystemClock.uptimeMillis() % 4000L
+        val angle = 0.090f * time.toInt()
+        Matrix.setRotateM(rotationMatrix, 0, angle, 0f, 0f, -1.0f)
+        // Draw triangle
+        triangle.draw(color)
     }
 
     override fun onSurfaceChanged(unused: GL10, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height)
+
     }
 
 
@@ -69,8 +82,7 @@ class Triangle {
             GLES20.glLinkProgram(it)
         }
     }
-    // Set color with red, green, blue and alpha (opacity) values
-    val color = floatArrayOf(0.0f, 0.96953125f, 0.92265625f, 1.0f)
+    // Set color with red, green, blue and alpha (opacity) value
 
     fun loadShader(type: Int, shaderCode: String): Int {
 
@@ -89,7 +101,7 @@ class Triangle {
     private val vertexCount: Int = triangleCoords.size / COORDS_PER_VERTEX
     private val vertexStride: Int = COORDS_PER_VERTEX * 4 // 4 bytes per vertex
 
-    fun draw() {
+    fun draw(color: FloatArray) {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
 
