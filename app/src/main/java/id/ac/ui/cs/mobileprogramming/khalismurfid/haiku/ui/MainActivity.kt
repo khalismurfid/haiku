@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "i.apps.notifications"
-            val descriptionText = "Test notification"
+            val descriptionText = "Haiku Notification"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel("1", name, importance).apply {
                 description = descriptionText
@@ -86,9 +86,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun sendNotification() {
-        var textTitle = "Friendly Reminder"
-        var textContent = "You have used this app for too long!! Go get a life please!!"
+    private fun sendNotification() {
+        val textTitle = "Friendly Reminder"
+        val textContent = "You have used this app for too long!! Go get a life please!!"
 
         // Create an explicit intent for an Activity in your app
         val intent = Intent(this, MainActivity::class.java).apply {
