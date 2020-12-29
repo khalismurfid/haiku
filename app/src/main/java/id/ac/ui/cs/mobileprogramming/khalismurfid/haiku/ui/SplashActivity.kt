@@ -1,10 +1,12 @@
 package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
+import MyGLSurfaceView
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
@@ -20,12 +22,15 @@ class SplashActivity : AppCompatActivity() {
     }
     private lateinit var handler: Handler
     private var locationReceiver: BroadcastReceiver? = null
+    private lateinit var gLView: GLSurfaceView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        checkForPermission()
+        gLView = MyGLSurfaceView(this)
+        setContentView(gLView)
+//        setContentView(R.layout.activity_splash)
 
+        checkForPermission()
 
         locationReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
