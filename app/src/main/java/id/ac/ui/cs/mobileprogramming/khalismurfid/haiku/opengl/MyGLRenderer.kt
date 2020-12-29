@@ -70,7 +70,7 @@ class Triangle {
         }
     }
     // Set color with red, green, blue and alpha (opacity) values
-    val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
+    val color = floatArrayOf(0.0f, 0.96953125f, 0.92265625f, 1.0f)
 
     fun loadShader(type: Int, shaderCode: String): Int {
 
