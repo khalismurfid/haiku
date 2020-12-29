@@ -16,10 +16,24 @@
            android:paddingLeft="16dp"
            android:paddingRight="16dp"
            android:orientation="vertical" >
-
            <TextView
                android:layout_width="wrap_content"
-               android:layout_marginTop="50dp"
+               android:layout_marginTop="30dp"
+               android:layout_height="wrap_content"
+               android:textSize="14sp"
+               android:text="@string/time_tracker"
+               />
+           <TextView
+               android:id="@+id/time"
+               android:layout_width="wrap_content"
+               android:layout_marginTop="2dp"
+               android:layout_height="wrap_content"
+               android:textSize="14sp"
+               android:text="0"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_marginTop="10dp"
                android:layout_height="wrap_content"
                android:textSize="20sp"
                android:text="@string/your_location"

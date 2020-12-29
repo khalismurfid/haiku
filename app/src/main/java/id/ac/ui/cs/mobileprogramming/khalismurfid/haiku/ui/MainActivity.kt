@@ -1,6 +1,9 @@
 package id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.SystemClock
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -8,15 +11,22 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.R
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.application.PoemApplication
+import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.common.Common
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.databinding.ActivityMainBinding
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel.PoemViewModel
 import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.ui.viewmodel.PoemViewModelFactory
+import kotlinx.android.synthetic.main.fragment_home.*
+import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
     val poemViewModel: PoemViewModel by viewModels {
         PoemViewModelFactory((application as PoemApplication).repository)
     }
     var location: String? = null
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable: Runnable
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val fragment = HomeFragment()
         addFragment(fragment)
+
+        mHandler = Handler(Looper.getMainLooper())
+        mRunnable = Runnable {
+            Common.timePassed += 1
+            mHandler.postDelayed(mRunnable, 1000)
+        }
+        mHandler.postDelayed(mRunnable, 1000)
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

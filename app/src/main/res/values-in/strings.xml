@@ -18,4 +18,5 @@
     <string name="choose_photo">PILIH FOTO</string>
     <string name="tags">Tag</string>
     <string name="places">Tempat</string>
+    <string name="time_tracker">Pelacak Waktu (Dalam Detik):</string>
 </resources>

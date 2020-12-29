@@ -5,6 +5,7 @@ import id.ac.ui.cs.mobileprogramming.khalismurfid.haiku.database.entity.Poem
 class Common {
     companion object{
         const val LOCATION_RECEIVER_KEY = "location"
+        var  timePassed: Int = 0
     }
 
     data class PoemCollection(val listPoems: ArrayList<Poem>, val name: String ){
