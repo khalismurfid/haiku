@@ -74,6 +74,8 @@ class SplashActivity : AppCompatActivity() {
                     Intent(this, LocationService::class.java).also { intent ->
                         startService(intent)
                     }
+                } else {
+                    showDenyPermissionDialog()
                 }
             }
         }
@@ -99,7 +101,7 @@ class SplashActivity : AppCompatActivity() {
             stopService(intent)
         }
     }
-    fun isNetworkAvailable(context: Context): Boolean {
+    private fun isNetworkAvailable(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         var activeNetworkInfo: NetworkInfo? = null
         activeNetworkInfo = cm.activeNetworkInfo
@@ -115,7 +117,7 @@ class SplashActivity : AppCompatActivity() {
 
         builder
             .setPositiveButton(
-                "Back",
+                "Close App",
                 DialogInterface.OnClickListener { dialog, which ->
                     // then app will close
                     finish()
@@ -125,5 +127,24 @@ class SplashActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
+    private fun showDenyPermissionDialog() {
+        val builder =
+            AlertDialog.Builder(this)
+
+        builder.setMessage("Haiku Need Location Access Permission to tag poem with current location. Please grant the permission manually from setting to continue using Haiku.")
+        builder.setTitle("Warning!")
+        builder.setCancelable(false)
+
+        builder
+            .setPositiveButton(
+                "Close App",
+                DialogInterface.OnClickListener { dialog, which ->
+                    // then app will close
+                    finish()
+                })
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
 
 }
